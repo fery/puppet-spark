@@ -4,10 +4,6 @@ class spark {
 
   $version = 'spark-0.9.0-incubating-bin-hadoop2'
 
-  file { '/usr/local':
-    ensure => directory,
-  }
-
   file { "/tmp/spark-${version}.tgz":
     ensure => present,
     require => Exec['Fetch spark'],
