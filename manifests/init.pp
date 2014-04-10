@@ -1,7 +1,5 @@
 class spark {
 
-  require wget
-
   $version = 'spark-0.9.0-incubating-bin-hadoop2'
 
   file { "/tmp/spark-${version}.tgz":
