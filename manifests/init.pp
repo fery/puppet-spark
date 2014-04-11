@@ -4,15 +4,9 @@ class spark {
 
   file { "/tmp/spark-${version}.tgz":
     ensure => present,
-    require => Exec['Fetch spark'],
-  }
-
-  exec { 'Fetch spark':
-    cwd => '/tmp',
-    command => "wget http://d3kbcqa49mib13.cloudfront.net/${version}.tgz",
-    creates => "/tmp/${version}.tgz",
-    path    => ['/opt/boxen/homebrew/bin'],
-    require => File['/usr/local'];
+    replace => false,
+    source => "http://d3kbcqa49mib13.cloudfront.net/${version}.tgz"
+    require => File['/usr/local']
   }
 
   exec { 'Extract spark':
@@ -20,7 +14,7 @@ class spark {
     command => "tar xvf /tmp/scala-${version}.tgz",
     creates => "/usr/local/${version}",
     path    => ['/usr/bin'],
-    require => Exec['Fetch spark'];
+    require => File["/tmp/spark-${version}.tgz"];
   }
 
   file { "/usr/local/${version}":
