@@ -5,8 +5,8 @@ class spark {
   file { "/tmp/spark-${version}.tgz":
     ensure => present,
     replace => false,
-    source => "http://d3kbcqa49mib13.cloudfront.net/${version}.tgz"
-    require => File['/usr/local']
+    source => "http://d3kbcqa49mib13.cloudfront.net/${version}.tgz",
+    require => File['/usr/local'];
   }
 
   exec { 'Extract spark':
